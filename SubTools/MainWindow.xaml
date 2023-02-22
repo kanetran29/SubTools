@@ -1,0 +1,163 @@
+﻿<Window x:Class="SubTools.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SubTools"
+        mc:Ignorable="d"
+        FontSize="18"
+        Title="SubTools@1.0.0 - (Powered By Kane Tran)"
+        Closing="Window_Closing"
+        SizeToContent="WidthAndHeight"
+        FontFamily="Cascadia Mono"
+        WindowStartupLocation="CenterScreen"
+        Icon="/icons8-video-playlist-48.png">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="3" />
+                </Style>
+            </Style.Resources>
+            <Setter Property="Background" Value="#FF869CF5" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Padding" Value="5,0" />
+        </Style>
+        <Style TargetType="GroupBox">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20" />
+                </Style>
+            </Style.Resources>
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" FontWeight="SemiBold"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="TextBox">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="3" />
+                </Style>
+            </Style.Resources>
+            <Setter Property="FontWeight" Value="Thin" />
+        </Style>
+    </Window.Resources>
+    <StackPanel Width="800">
+        <GroupBox Header="Select ffmpeg"
+                  Margin="5">
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBox IsReadOnly="True" Grid.Column="0" Name="FFMpeg_Location"></TextBox>
+                <Button Width="150px" Grid.Column="2" Click="Select_FFMpeg" Height="25" VerticalAlignment="Top">Select FFmpeg</Button>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Select video file"
+                  Margin="5">
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBox IsReadOnly="True" x:Name="Input_Video" Grid.Column="0" Grid.Row="1"></TextBox>
+                <Button Width="150px" x:Name="Choose_Video_Button" Grid.Column="2" Grid.Row="1" Click="Select_Video">Select Video</Button>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Select srt file"
+                  Margin="5">
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBox IsReadOnly="True" x:Name="Input_Srt" Grid.Column="0" Grid.Row="1"></TextBox>
+                <Button Width="150px" x:Name="Choose_Srt_Button" Grid.Column="2" Grid.Row="1" Click="Select_Srt">Select Srt</Button>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Select output directory"
+                  Margin="5">
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBox IsReadOnly="True" x:Name="Output_Dir" Grid.Row="1" Grid.Column="0"></TextBox>
+                <Button Width="150px" x:Name="Select_Output_Dir" Grid.Row="1" Grid.Column="2" Click="Select_Output_Folder">Select Folder</Button>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Select API Keys file"
+                  Margin="5">
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBox IsReadOnly="True" Grid.Column="0" Name="API_Keys_Location"></TextBox>
+                <Button Width="150px" Grid.Column="2" Click="Select_Keys" Height="25" VerticalAlignment="Top">Select Keys</Button>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="API Info"
+                  Padding="0 5"
+                  Margin="5">
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*" />
+                    <ColumnDefinition Width="2.5*" />
+                    <ColumnDefinition Width="1.5*" />
+                    <ColumnDefinition Width="2.5*" />
+                    <ColumnDefinition Width="1.5*" />
+                    <ColumnDefinition Width="2.5*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Margin="0 0 10 0" VerticalAlignment="Center">Provider</TextBlock>
+                <ComboBox x:Name="Provider_Combobox" Grid.Column="1"  Margin="5 0" SelectedIndex="1">
+                    <ComboBoxItem>FPT</ComboBoxItem>
+                    <ComboBoxItem>TubeKit</ComboBoxItem>
+                </ComboBox>
+                <TextBlock Grid.Column="2" Margin="0 0 10 0" VerticalAlignment="Center" TextAlignment="Right">Voice</TextBlock>
+                <TextBox HorizontalContentAlignment="Center" x:Name="Voice_TextBox" Grid.Column="3"></TextBox>
+                <TextBlock Grid.Column="4" Margin="0 0 10 0" VerticalAlignment="Center" TextAlignment="Right">Speed</TextBlock>
+                <TextBox HorizontalContentAlignment="Center" x:Name="Speed_TextBox" Grid.Column="5"></TextBox>
+            </Grid>
+        </GroupBox>
+
+        <StackPanel Orientation="Horizontal"
+                    Margin="10,10,10,10"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom">
+            <Button FontWeight="SemiBold" Padding="10 5" Margin="5,5,0,0" Content="Start Processing Video" x:Name="Processing_Video_Button" Background="#FF63D07E" />
+        </StackPanel>
+    </StackPanel>
+</Window>
